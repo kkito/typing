@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0' name='viewport' />
+  <style>
+    .app-main {
+      width: 80%;
+      margin:auto;
+      border:1px lightblue solid;
+    }
+    .app-main .game {
+      display: inline-block;
+      width: 80%;
+      min-height: 600px;
+      position: relative;
+    }
+    .app-main .score{
+      display: inline-block;
+      width: 19%;
+    }
+    .fallen-item {
+      display: inline-block;
+      position: absolute;
+      border:1px lightgreen solid;
+      padding: 0.2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1> open dev tool and </h1>
+  <div id="app-main" class="app-main">
+    <div><input type="text" name="start" value="click to start"></div>
+    <div id="app_game" class="game">
+      show game
+      </div>
+      <div class="score">
+        this is show score
+      </div>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>
