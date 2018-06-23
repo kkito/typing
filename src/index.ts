@@ -25,6 +25,20 @@ import { AlphabetStage } from './alphabet-stage';
         event.stopPropagation();
         return false;
     })
+    const start = myWindow.document.getElementById('start-btn');
+    if(start) {
+      start.onblur = () => {
+        console.log("on blur")
+        start.value = "click to start"
+        stage.pause();
+      }
+
+      start.onfocus = () => {
+        console.log("on focus")
+        start.value = "stop"
+        stage.play();
+      }
+    }
 
   }
   // we can use Greeter , execute following in console

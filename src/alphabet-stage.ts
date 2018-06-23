@@ -2,6 +2,7 @@ import { FallenItem } from './fallen-item';
 export class AlphabetStage {
   protected stageEle: HTMLElement;
   protected fallenItems: FallenItem[] = [];
+  protected isPause = true;
   constructor(stageDiv: HTMLElement) {
     this.stageEle = stageDiv;
   }
@@ -28,20 +29,24 @@ export class AlphabetStage {
   public start(){
     this.update();
     setInterval(()=> {
-      this.appendFallenItem();
-    } , 5000);
+      if(!this.isPause) {
+        this.appendFallenItem();
+      }
+    } , 4000);
   }
 
   public update(){
-    this.fallenItems.forEach((item)=> {
-      if (item.isFallen(this.getHeight())) {
-        this.removeItem(item);
-      } else {
-        item.update();
-      }
-    })
+    if (!this.isPause) {
+      this.fallenItems.forEach((item) => {
+        if (item.isFallen(this.getHeight())) {
+          this.removeItem(item);
+        } else {
+          item.update();
+        }
+      })
+    }
     setTimeout(()=> {
-      this.update()
+        this.update()
     } , 24);
   }
 
@@ -53,6 +58,14 @@ export class AlphabetStage {
         this.removeItem(item);
       }
     })
+  }
+
+  public pause() {
+    this.isPause = true;
+  }
+
+  public play() {
+    this.isPause = false;
   }
 
   protected removeItem(item:FallenItem) {
