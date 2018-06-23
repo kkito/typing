@@ -8,6 +8,9 @@ script:
 - npm run build
 after_script:
 - ls -ltrh dist/
+- eval "$(ssh-agent -s)"
+- ssh-add ./ciweb
+- rsync -avc dist/ ciweb@kkito.cn:/var/www/html/typing/
 before_install:
 - openssl aes-256-cbc -K $encrypted_3e0860eaae83_key -iv $encrypted_3e0860eaae83_iv
   -in ciweb.enc -out ciweb -d
