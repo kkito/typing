@@ -7,8 +7,9 @@ export class AlphabetStage {
     this.stageEle = stageDiv;
   }
 
-  public appendFallenItem(): FallenItem {
-    const item = new FallenItem(this.getNextAlpha() , this.getSpeed() , this.getFallenItemLeft());
+  public appendFallenItem(speed?:number): FallenItem {
+    speed = speed ? speed : this.getSpeed();
+    const item = new FallenItem(this.getNextAlpha() , speed , this.getFallenItemLeft());
     this.stageEle.appendChild(item.getElement());
     this.fallenItems.push(item);
     return item;
@@ -56,6 +57,9 @@ export class AlphabetStage {
     this.fallenItems.forEach((item) => {
       if(item.sameContent(compare)) {
         this.removeItem(item);
+        if (this.fallenItems.length === 0) {
+          this.appendFallenItem(this.getSpeed() + 1)
+        }
       }
     })
   }
@@ -77,7 +81,7 @@ export class AlphabetStage {
   protected getNextAlpha():string{
     // 97-122
     const offset = Math.floor(Math.random() * 100) % 25;
-    return String.fromCharCode(96 + offset);
+    return String.fromCharCode(97 + offset);
   }
 
 }
