@@ -7,61 +7,65 @@ export class AlphabetStage {
     this.stageEle = stageDiv;
   }
 
-  public appendFallenItem(speed?:number): FallenItem {
+  public appendFallenItem(speed?: number): FallenItem {
     speed = speed ? speed : this.getSpeed();
-    const item = new FallenItem(this.getNextAlpha() , speed , this.getFallenItemLeft());
+    const item = new FallenItem(
+      this.getNextAlpha(),
+      speed,
+      this.getFallenItemLeft()
+    );
     this.stageEle.appendChild(item.getElement());
     this.fallenItems.push(item);
     return item;
   }
 
-  public getSpeed():number {
+  public getSpeed(): number {
     return 1;
   }
 
-  public getFallenItemLeft():number {
+  public getFallenItemLeft(): number {
     return Math.floor(Math.random() * this.stageEle.offsetWidth);
   }
 
-  public getHeight(){
+  public getHeight() {
     return this.stageEle.offsetHeight;
   }
 
-  public start(){
+  public start() {
     this.update();
-    setInterval(()=> {
-      if(!this.isPause) {
+    setInterval(() => {
+      if (!this.isPause) {
         this.appendFallenItem();
       }
-    } , 4000);
+    }, 4000);
   }
 
-  public update(){
+  public update() {
     if (!this.isPause) {
-      this.fallenItems.forEach((item) => {
+      this.fallenItems.forEach(item => {
         if (item.isFallen(this.getHeight())) {
           this.removeItem(item);
         } else {
           item.update();
         }
-      })
+      });
     }
-    setTimeout(()=> {
-        this.update()
-    } , 24);
+    setTimeout(() => {
+      this.update();
+    }, 24);
   }
 
-  public pressKeyCode(keyCode:number) {
+  public pressKeyCode(keyCode: number) {
     const str = String.fromCharCode(keyCode);
     const compare = str.toLowerCase();
-    this.fallenItems.forEach((item) => {
-      if(item.sameContent(compare)) {
+    this.fallenItems.forEach(item => {
+      if (item.sameContent(compare)) {
         this.removeItem(item);
         if (this.fallenItems.length === 0) {
-          this.appendFallenItem(this.getSpeed() + 1)
+          this.appendFallenItem(this.getSpeed() + 1);
         }
       }
-    })
+    });
   }
 
   public pause() {
@@ -72,16 +76,15 @@ export class AlphabetStage {
     this.isPause = false;
   }
 
-  protected removeItem(item:FallenItem) {
+  protected removeItem(item: FallenItem) {
     const idx = this.fallenItems.indexOf(item);
-    this.fallenItems.splice(idx , 1);
+    this.fallenItems.splice(idx, 1);
     this.stageEle.removeChild(item.getElement());
   }
 
-  protected getNextAlpha():string{
+  protected getNextAlpha(): string {
     // 97-122
     const offset = Math.floor(Math.random() * 100) % 25;
     return String.fromCharCode(97 + offset);
   }
-
 }

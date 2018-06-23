@@ -1,7 +1,7 @@
 import { AlphabetStage } from './alphabet-stage';
 
 // tslint:disable-next-line:only-arrow-functions
-(function (currentWindow: Window) {
+(function(currentWindow: Window) {
   // execute when load index.js
 
   // tslint:disable-next-line:no-console
@@ -17,29 +17,28 @@ import { AlphabetStage } from './alphabet-stage';
     stage.appendFallenItem();
     stage.appendFallenItem();
     stage.start();
-    myWindow.mystage= stage;
-    myWindow.onkeypress = ((event:any) => {
-        // tslint:disable-next-line:no-console
-        console.log(event.keyCode);
-        stage.pressKeyCode(event.keyCode);
-        event.stopPropagation();
-        return false;
-    })
+    myWindow.mystage = stage;
+    myWindow.onkeypress = (event: any) => {
+      // tslint:disable-next-line:no-console
+      console.log(event.keyCode);
+      stage.pressKeyCode(event.keyCode);
+      event.stopPropagation();
+      return false;
+    };
     const start = myWindow.document.getElementById('start-btn');
-    if(start) {
+    if (start) {
       start.onblur = () => {
-        console.log("on blur")
-        start.value = "click to start"
+        console.log('on blur');
+        start.value = 'click to start';
         stage.pause();
-      }
+      };
 
       start.onfocus = () => {
-        console.log("on focus")
-        start.value = "stop"
+        console.log('on focus');
+        start.value = 'stop';
         stage.play();
-      }
+      };
     }
-
   }
   // we can use Greeter , execute following in console
   // var greet = new Greeter('myName');
