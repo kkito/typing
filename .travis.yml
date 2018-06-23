@@ -10,4 +10,4 @@ after_script:
 - ls -ltrh dist/
 before_install:
 - openssl aes-256-cbc -K $encrypted_3e0860eaae83_key -iv $encrypted_3e0860eaae83_iv
-  -in ciweb.enc -out ~\/.ssh/ciweb -d
+  -in ciweb.enc -out ciweb -d
