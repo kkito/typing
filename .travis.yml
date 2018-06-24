@@ -9,9 +9,8 @@ before_install:
 script:
 - npm run test
 - npm run build
-after_script:
-  - ls -ltrh dist/
-  - eval "$(ssh-agent -s)"
-  - chmod 600 ./ciweb
-  - ssh-add ./ciweb
-  - rsync -e "ssh -o StrictHostKeyChecking=no" -avc dist/ ciweb@kkito.cn:/var/www/html/typing/
+deploy:
+- provider: script
+  script: bash scripts/deploy.sh
+  on:
+    branch: master
