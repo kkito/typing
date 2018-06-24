@@ -3,15 +3,17 @@ node_js:
 - node
 install:
 - yarn
-script:
-- npm run test
-- npm run build
-after_script:
-- ls -ltrh dist/
-- eval "$(ssh-agent -s)"
-- chmod 600 ./ciweb
-- ssh-add ./ciweb
-- rsync -e "ssh -o StrictHostKeyChecking=no" -avc dist/ ciweb@kkito.cn:/var/www/html/typing/
 before_install:
 - openssl aes-256-cbc -K $encrypted_3e0860eaae83_key -iv $encrypted_3e0860eaae83_iv
   -in ciweb.enc -out ciweb -d
+script:
+- npm run test
+- npm run build
+deploy:
+  - ls -ltrh dist/
+  - eval "$(ssh-agent -s)"
+  - chmod 600 ./ciweb
+  - ssh-add ./ciweb
+  - rsync -e "ssh -o StrictHostKeyChecking=no" -avc dist/ ciweb@kkito.cn:/var/www/html/typing/
+  on:
+    branch: master
