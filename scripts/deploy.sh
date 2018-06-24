@@ -1,5 +1,6 @@
 
- ls -ltrh dist/
+ls -ltrh
+#  ls -ltrh dist/
 #  eval "$(ssh-agent -s)"
 #  chmod 600 ./ciweb
 #  ssh-add ./ciweb
