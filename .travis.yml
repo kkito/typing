@@ -11,6 +11,7 @@ script:
 - npm run build
 deploy:
 - provider: script
+  skip_cleanup: true
   script: bash scripts/deploy.sh
   on:
     branch: master
